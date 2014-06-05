@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DCA694F31940824300575F99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F21940824300575F99 /* Foundation.framework */; };
+		DCA694F51940824300575F99 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F41940824300575F99 /* CoreGraphics.framework */; };
+		DCA694F71940824300575F99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F61940824300575F99 /* UIKit.framework */; };
+		DCA694FD1940824300575F99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCA694FB1940824300575F99 /* InfoPlist.strings */; };
+		DCA694FF1940824300575F99 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA694FE1940824300575F99 /* main.m */; };
+		DCA695031940824300575F99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA695021940824300575F99 /* AppDelegate.m */; };
+		DCA695061940824300575F99 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA695041940824300575F99 /* Main_iPhone.storyboard */; };
+		DCA695091940824300575F99 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA695071940824300575F99 /* Main_iPad.storyboard */; };
+		DCA6950C1940824300575F99 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA6950B1940824300575F99 /* ViewController.m */; };
+		DCA6950E1940824300575F99 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA6950D1940824300575F99 /* Images.xcassets */; };
+		DCA695151940824300575F99 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA695141940824300575F99 /* XCTest.framework */; };
+		DCA695161940824300575F99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F21940824300575F99 /* Foundation.framework */; };
+		DCA695171940824300575F99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F61940824300575F99 /* UIKit.framework */; };
+		DCA6951F1940824300575F99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCA6951D1940824300575F99 /* InfoPlist.strings */; };
+		DCA695211940824300575F99 /* YONAutoCompleteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA695201940824300575F99 /* YONAutoCompleteTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DCA695181940824300575F99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCA694E71940824300575F99 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCA694EE1940824300575F99;
+			remoteInfo = YONAutoComplete;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DCA694EF1940824300575F99 /* YONAutoComplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YONAutoComplete.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA694F21940824300575F99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DCA694F41940824300575F99 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DCA694F61940824300575F99 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DCA694FA1940824300575F99 /* YONAutoComplete-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YONAutoComplete-Info.plist"; sourceTree = "<group>"; };
+		DCA694FC1940824300575F99 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DCA694FE1940824300575F99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DCA695001940824300575F99 /* YONAutoComplete-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YONAutoComplete-Prefix.pch"; sourceTree = "<group>"; };
+		DCA695011940824300575F99 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DCA695021940824300575F99 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DCA695051940824300575F99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		DCA695081940824300575F99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		DCA6950A1940824300575F99 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DCA6950B1940824300575F99 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DCA6950D1940824300575F99 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DCA695131940824300575F99 /* YONAutoCompleteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YONAutoCompleteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA695141940824300575F99 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		DCA6951C1940824300575F99 /* YONAutoCompleteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YONAutoCompleteTests-Info.plist"; sourceTree = "<group>"; };
+		DCA6951E1940824300575F99 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DCA695201940824300575F99 /* YONAutoCompleteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YONAutoCompleteTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DCA694EC1940824300575F99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA694F51940824300575F99 /* CoreGraphics.framework in Frameworks */,
+				DCA694F71940824300575F99 /* UIKit.framework in Frameworks */,
+				DCA694F31940824300575F99 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA695101940824300575F99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA695151940824300575F99 /* XCTest.framework in Frameworks */,
+				DCA695171940824300575F99 /* UIKit.framework in Frameworks */,
+				DCA695161940824300575F99 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DCA694E61940824300575F99 = {
+			isa = PBXGroup;
+			children = (
+				DCA694F81940824300575F99 /* YONAutoComplete */,
+				DCA6951A1940824300575F99 /* YONAutoCompleteTests */,
+				DCA694F11940824300575F99 /* Frameworks */,
+				DCA694F01940824300575F99 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DCA694F01940824300575F99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCA694EF1940824300575F99 /* YONAutoComplete.app */,
+				DCA695131940824300575F99 /* YONAutoCompleteTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCA694F11940824300575F99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCA694F21940824300575F99 /* Foundation.framework */,
+				DCA694F41940824300575F99 /* CoreGraphics.framework */,
+				DCA694F61940824300575F99 /* UIKit.framework */,
+				DCA695141940824300575F99 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCA694F81940824300575F99 /* YONAutoComplete */ = {
+			isa = PBXGroup;
+			children = (
+				DCA695011940824300575F99 /* AppDelegate.h */,
+				DCA695021940824300575F99 /* AppDelegate.m */,
+				DCA695041940824300575F99 /* Main_iPhone.storyboard */,
+				DCA695071940824300575F99 /* Main_iPad.storyboard */,
+				DCA6950A1940824300575F99 /* ViewController.h */,
+				DCA6950B1940824300575F99 /* ViewController.m */,
+				DCA6950D1940824300575F99 /* Images.xcassets */,
+				DCA694F91940824300575F99 /* Supporting Files */,
+			);
+			path = YONAutoComplete;
+			sourceTree = "<group>";
+		};
+		DCA694F91940824300575F99 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DCA694FA1940824300575F99 /* YONAutoComplete-Info.plist */,
+				DCA694FB1940824300575F99 /* InfoPlist.strings */,
+				DCA694FE1940824300575F99 /* main.m */,
+				DCA695001940824300575F99 /* YONAutoComplete-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DCA6951A1940824300575F99 /* YONAutoCompleteTests */ = {
+			isa = PBXGroup;
+			children = (
+				DCA695201940824300575F99 /* YONAutoCompleteTests.m */,
+				DCA6951B1940824300575F99 /* Supporting Files */,
+			);
+			path = YONAutoCompleteTests;
+			sourceTree = "<group>";
+		};
+		DCA6951B1940824300575F99 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DCA6951C1940824300575F99 /* YONAutoCompleteTests-Info.plist */,
+				DCA6951D1940824300575F99 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DCA694EE1940824300575F99 /* YONAutoComplete */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCA695241940824300575F99 /* Build configuration list for PBXNativeTarget "YONAutoComplete" */;
+			buildPhases = (
+				DCA694EB1940824300575F99 /* Sources */,
+				DCA694EC1940824300575F99 /* Frameworks */,
+				DCA694ED1940824300575F99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YONAutoComplete;
+			productName = YONAutoComplete;
+			productReference = DCA694EF1940824300575F99 /* YONAutoComplete.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DCA695121940824300575F99 /* YONAutoCompleteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCA695271940824300575F99 /* Build configuration list for PBXNativeTarget "YONAutoCompleteTests" */;
+			buildPhases = (
+				DCA6950F1940824300575F99 /* Sources */,
+				DCA695101940824300575F99 /* Frameworks */,
+				DCA695111940824300575F99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCA695191940824300575F99 /* PBXTargetDependency */,
+			);
+			name = YONAutoCompleteTests;
+			productName = YONAutoCompleteTests;
+			productReference = DCA695131940824300575F99 /* YONAutoCompleteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DCA694E71940824300575F99 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Yonat Sharon";
+				TargetAttributes = {
+					DCA695121940824300575F99 = {
+						TestTargetID = DCA694EE1940824300575F99;
+					};
+				};
+			};
+			buildConfigurationList = DCA694EA1940824300575F99 /* Build configuration list for PBXProject "YONAutoComplete" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DCA694E61940824300575F99;
+			productRefGroup = DCA694F01940824300575F99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCA694EE1940824300575F99 /* YONAutoComplete */,
+				DCA695121940824300575F99 /* YONAutoCompleteTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DCA694ED1940824300575F99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA695091940824300575F99 /* Main_iPad.storyboard in Resources */,
+				DCA6950E1940824300575F99 /* Images.xcassets in Resources */,
+				DCA695061940824300575F99 /* Main_iPhone.storyboard in Resources */,
+				DCA694FD1940824300575F99 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA695111940824300575F99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA6951F1940824300575F99 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DCA694EB1940824300575F99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA6950C1940824300575F99 /* ViewController.m in Sources */,
+				DCA695031940824300575F99 /* AppDelegate.m in Sources */,
+				DCA694FF1940824300575F99 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA6950F1940824300575F99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCA695211940824300575F99 /* YONAutoCompleteTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DCA695191940824300575F99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCA694EE1940824300575F99 /* YONAutoComplete */;
+			targetProxy = DCA695181940824300575F99 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DCA694FB1940824300575F99 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCA694FC1940824300575F99 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DCA695041940824300575F99 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCA695051940824300575F99 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		DCA695071940824300575F99 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCA695081940824300575F99 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		DCA6951D1940824300575F99 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCA6951E1940824300575F99 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DCA695221940824300575F99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DCA695231940824300575F99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DCA695251940824300575F99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "YONAutoComplete/YONAutoComplete-Prefix.pch";
+				INFOPLIST_FILE = "YONAutoComplete/YONAutoComplete-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DCA695261940824300575F99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "YONAutoComplete/YONAutoComplete-Prefix.pch";
+				INFOPLIST_FILE = "YONAutoComplete/YONAutoComplete-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		DCA695281940824300575F99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/YONAutoComplete.app/YONAutoComplete";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "YONAutoComplete/YONAutoComplete-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "YONAutoCompleteTests/YONAutoCompleteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		DCA695291940824300575F99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/YONAutoComplete.app/YONAutoComplete";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "YONAutoComplete/YONAutoComplete-Prefix.pch";
+				INFOPLIST_FILE = "YONAutoCompleteTests/YONAutoCompleteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DCA694EA1940824300575F99 /* Build configuration list for PBXProject "YONAutoComplete" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA695221940824300575F99 /* Debug */,
+				DCA695231940824300575F99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCA695241940824300575F99 /* Build configuration list for PBXNativeTarget "YONAutoComplete" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA695251940824300575F99 /* Debug */,
+				DCA695261940824300575F99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DCA695271940824300575F99 /* Build configuration list for PBXNativeTarget "YONAutoCompleteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA695281940824300575F99 /* Debug */,
+				DCA695291940824300575F99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DCA694E71940824300575F99 /* Project object */;
+}
