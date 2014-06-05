@@ -7,9 +7,10 @@
 //
 
 #import "ViewController.h"
+#import "YONAutoComplete.h"
 
 @interface ViewController ()
-
+@property (nonatomic, strong) YONAutoComplete *autoComplete;
 @end
 
 @implementation ViewController
@@ -17,13 +18,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 320, 24)];
+    [self.view addSubview:textField];
+    textField.center = self.view.center;
+    textField.borderStyle = UITextBorderStyleRoundedRect;
+    textField.text = @"Lorem ipsum dolor sit amet, tempor.";
+
+    self.autoComplete = [YONAutoComplete new];
+    textField.delegate = self.autoComplete;
+
+    [textField becomeFirstResponder];
 }
 
 @end

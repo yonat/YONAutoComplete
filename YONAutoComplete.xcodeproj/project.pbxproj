@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC0A4A97194088EB006B0E86 /* YONAutoComplete.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A4A96194088EB006B0E86 /* YONAutoComplete.m */; };
 		DCA694F31940824300575F99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F21940824300575F99 /* Foundation.framework */; };
 		DCA694F51940824300575F99 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F41940824300575F99 /* CoreGraphics.framework */; };
 		DCA694F71940824300575F99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F61940824300575F99 /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC0A4A95194088EB006B0E86 /* YONAutoComplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YONAutoComplete.h; sourceTree = "<group>"; };
+		DC0A4A96194088EB006B0E86 /* YONAutoComplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YONAutoComplete.m; sourceTree = "<group>"; };
 		DCA694EF1940824300575F99 /* YONAutoComplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YONAutoComplete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA694F21940824300575F99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCA694F41940824300575F99 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -120,6 +123,8 @@
 				DCA695071940824300575F99 /* Main_iPad.storyboard */,
 				DCA6950A1940824300575F99 /* ViewController.h */,
 				DCA6950B1940824300575F99 /* ViewController.m */,
+				DC0A4A95194088EB006B0E86 /* YONAutoComplete.h */,
+				DC0A4A96194088EB006B0E86 /* YONAutoComplete.m */,
 				DCA6950D1940824300575F99 /* Images.xcassets */,
 				DCA694F91940824300575F99 /* Supporting Files */,
 			);
@@ -256,6 +261,7 @@
 				DCA6950C1940824300575F99 /* ViewController.m in Sources */,
 				DCA695031940824300575F99 /* AppDelegate.m in Sources */,
 				DCA694FF1940824300575F99 /* main.m in Sources */,
+				DC0A4A97194088EB006B0E86 /* YONAutoComplete.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +476,7 @@
 				DCA695261940824300575F99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DCA695271940824300575F99 /* Build configuration list for PBXNativeTarget "YONAutoCompleteTests" */ = {
 			isa = XCConfigurationList;
@@ -478,6 +485,7 @@
 				DCA695291940824300575F99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
