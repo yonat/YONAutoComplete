@@ -115,30 +115,41 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (string.length == 0 && range.length > 0) return YES; // user deleting selection
+    if (string.length == 0 && range.length > 1) { // user deleting selection
+        self.text = nil;
+        [self updateFrame];
+        return YES;
+    }
+
+    // mark completions with bold
+    UIFontDescriptor *boldDescriptior = [self.font.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+    UIFont *boldFont = [UIFont fontWithDescriptor:boldDescriptior size:self.font.pointSize];
+    NSMutableAttributedString *completionsList = [NSMutableAttributedString new];
 
     // find completions
+    __block NSString *bestCompletion = nil;
+    __block NSAttributedString *newLine = [[NSAttributedString alloc] initWithString:@"\n"];
     NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    NSPredicate *containsNewText = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", newText];
-    NSArray *matchingCompletions = [self.completions filteredArrayUsingPredicate:containsNewText];
-
-    // TODO: mark each completion bold where newText is
+    [self.completions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *completion = obj;
+        NSRange range = [completion rangeOfString:newText options:NSCaseInsensitiveSearch];
+        if (NSNotFound != range.location) {
+            if (nil == bestCompletion && range.location == 0) {
+                bestCompletion = completion;
+            }
+            NSMutableAttributedString *match = [[NSMutableAttributedString alloc] initWithString:completion];
+            [match addAttribute:NSFontAttributeName value:boldFont range:range];
+            if (completionsList.length > 0) [completionsList appendAttributedString:newLine];
+            [completionsList appendAttributedString:match];
+        }
+    }];
 
     // update completions list
-    self.text = [matchingCompletions componentsJoinedByString:@"\n"];
+    self.attributedText = completionsList;
     [self updateFrame];
-    if (0 == matchingCompletions.count) return YES;
-
-    // find best completion
-    NSUInteger bestCompletionIdx = [matchingCompletions indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *completion = obj;
-        NSRange range = [completion rangeOfString:newText options:NSCaseInsensitiveSearch|NSAnchoredSearch];
-        return range.location == 0;
-    }];
-    if (NSNotFound == bestCompletionIdx) return YES;
-    NSString *bestCompletion = matchingCompletions[bestCompletionIdx];
 
     // put best completion in textField as selection
+    if (nil == bestCompletion) return YES;
     textField.text = bestCompletion;
     UITextPosition *beginning = [textField beginningOfDocument];
     UITextPosition *selStart = [textField positionFromPosition:beginning offset:newText.length];
