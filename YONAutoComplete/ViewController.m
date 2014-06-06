@@ -19,11 +19,12 @@
 {
     [super viewDidLoad];
 
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 320, 24)];
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 20, 300, 24)];
     [self.view addSubview:textField];
-    textField.center = self.view.center;
     textField.borderStyle = UITextBorderStyleRoundedRect;
+    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textField.text = @"Lorem ipsum dolor sit amet, tempor.";
+    textField.backgroundColor = [UIColor greenColor];
 
     self.autoComplete = [YONAutoComplete new];
     textField.delegate = self.autoComplete;

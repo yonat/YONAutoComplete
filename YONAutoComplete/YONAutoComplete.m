@@ -20,14 +20,23 @@
 
 - (void)adjustMaxFrame:(NSNotification *)note
 {
+    // find keyboard frame
     NSDictionary *info = note.userInfo;
     NSValue *keyboardFrameValue = info[UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardFrame = [self convertRect:keyboardFrameValue.CGRectValue fromView:nil];
-    _maxFrame.size.height = CGRectGetMinY(keyboardFrame);
+    CGFloat maxHeight = CGRectGetMinY(keyboardFrame);
 
-    // TODO: update self.frame?
+    // update maxFrame
+    _maxFrame = self.textField.frame;
+    _maxFrame.origin.y += _maxFrame.size.height;
+    _maxFrame.size.height = maxHeight;
 
-    // TODO: test rotations
+    // update frame
+    CGFloat maxWidth = CGRectGetWidth(_maxFrame);
+    CGSize newSize = [self sizeThatFits:CGSizeMake(maxWidth, MAXFLOAT)];
+    CGRect newFrame = _maxFrame;
+    newFrame.size = CGSizeMake(MAX(newSize.width, maxWidth), MIN(newSize.height, maxHeight));
+    self.frame = newFrame;
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)gestureRecognizer
@@ -46,6 +55,7 @@
     NSUInteger itemLocation = startRange.location + startRange.length;
     NSUInteger itemLength = endRange.location - itemLocation;
     NSString *selectedItem = [allItems substringWithRange:NSMakeRange(itemLocation, itemLength)];
+    // TODO: maybe just keep a table of offset->item
 
     // set the text of the field
     self.textField.text = selectedItem;
@@ -95,7 +105,7 @@
     textField.selectedTextRange = [textField textRangeFromPosition:selStart toPosition:selEnd];
 
     // TODO: read list of completions (in bg thread?)
-    self.text = @"First\nSecond\nThird\nFourth\nend!";
+    self.text = @"First\nSecond\nThird\nFourth\nThe fifth symphony has very long endings, that just go on and on and on...\nSixth\nSeven is a lucky number\nend!";
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -112,7 +122,7 @@
 
     // TODO: find completion and resize view accordingly
 
-    // TODO: mark eache completion bold where textField.text is
+    // TODO: mark each completion bold where textField.text is
 
     return YES;
 }
