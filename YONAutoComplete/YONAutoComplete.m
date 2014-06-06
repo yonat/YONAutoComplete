@@ -149,7 +149,8 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
-    // TODO: clear completions
+    self.text = nil;
+    [self updateFrame];
     return YES;
 }
 

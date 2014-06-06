@@ -25,6 +25,7 @@
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textField.text = @"Lorem ipsum dolor sit amet, tempor.";
     textField.backgroundColor = [UIColor greenColor];
+    textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 
     self.autoComplete = [YONAutoComplete new];
     textField.delegate = self.autoComplete;
