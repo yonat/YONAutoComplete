@@ -10,6 +10,7 @@
 
 @interface YONAutoComplete ()
 
+@property (nonatomic, strong) NSMutableArray *completions;
 @property (nonatomic, weak) UITextField* textField;
 @property (nonatomic, assign) CGRect maxFrame;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
@@ -18,25 +19,32 @@
 
 @implementation YONAutoComplete
 
+- (void)updateFrame
+{
+    CGFloat maxWidth = CGRectGetWidth(_maxFrame);
+    CGSize newSize = self.text.length ? [self sizeThatFits:CGSizeMake(maxWidth, MAXFLOAT)] : CGSizeZero;
+    CGRect newFrame = _maxFrame;
+    newFrame.size = CGSizeMake(MAX(newSize.width, maxWidth), MIN(newSize.height, CGRectGetHeight(_maxFrame)));
+    self.frame = newFrame;
+}
+
 - (void)adjustMaxFrame:(NSNotification *)note
 {
-    // find keyboard frame
-    NSDictionary *info = note.userInfo;
-    NSValue *keyboardFrameValue = info[UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardFrame = [self convertRect:keyboardFrameValue.CGRectValue fromView:nil];
-    CGFloat maxHeight = CGRectGetMinY(keyboardFrame);
+    CGFloat maxHeight = 0;
+    if (nil != note) {
+        // find keyboard frame
+        NSDictionary *info = note.userInfo;
+        NSValue *keyboardFrameValue = info[UIKeyboardFrameEndUserInfoKey];
+        CGRect keyboardFrame = [self convertRect:keyboardFrameValue.CGRectValue fromView:nil];
+        maxHeight = CGRectGetMinY(keyboardFrame);
+    }
 
     // update maxFrame
     _maxFrame = self.textField.frame;
     _maxFrame.origin.y += _maxFrame.size.height;
     _maxFrame.size.height = maxHeight;
 
-    // update frame
-    CGFloat maxWidth = CGRectGetWidth(_maxFrame);
-    CGSize newSize = [self sizeThatFits:CGSizeMake(maxWidth, MAXFLOAT)];
-    CGRect newFrame = _maxFrame;
-    newFrame.size = CGSizeMake(MAX(newSize.width, maxWidth), MIN(newSize.height, maxHeight));
-    self.frame = newFrame;
+    [self updateFrame];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)gestureRecognizer
@@ -67,12 +75,8 @@
     self.editable = NO;
     self.dataDetectorTypes = UIDataDetectorTypeNone;
 
-    // size same as textField width
-    CGRect frame = textField.frame;
-    frame.origin.y += frame.size.height;
-    frame.size.height = 0;
-    self.frame = self.maxFrame = frame;
     [textField.superview addSubview:self];
+    [self adjustMaxFrame:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adjustMaxFrame:) name:UIKeyboardDidShowNotification object:nil];
 
@@ -98,14 +102,8 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    // TODO: delete
-    UITextPosition *start = [textField beginningOfDocument];
-    UITextPosition *selStart = [textField positionFromPosition:start offset:2];
-    UITextPosition *selEnd = [textField positionFromPosition:start offset:7];
-    textField.selectedTextRange = [textField textRangeFromPosition:selStart toPosition:selEnd];
-
     // TODO: read list of completions (in bg thread?)
-    self.text = @"First\nSecond\nThird\nFourth\nThe fifth symphony has very long endings, that just go on and on and on...\nSixth\nSeven is a lucky number\nend!";
+    self.completions = @[@"First", @"Second", @"Third", @"Fourth", @"The fifth symphony has very long endings, that just go on and on and on...", @"Sixth", @"Seven is a lucky number", @"end!"];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -117,13 +115,41 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    // TODO: set frame below textField and above keyboard
-    self.frame = self.maxFrame;
+    if (string.length == 0 && range.length > 0) return YES; // user deleting selection
 
-    // TODO: find completion and resize view accordingly
+    // find completions
+    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSPredicate *containsNewText = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", newText];
+    NSArray *matchingCompletions = [self.completions filteredArrayUsingPredicate:containsNewText];
 
-    // TODO: mark each completion bold where textField.text is
+    // TODO: mark each completion bold where newText is
 
+    // update completions list
+    self.text = [matchingCompletions componentsJoinedByString:@"\n"];
+    [self updateFrame];
+    if (0 == matchingCompletions.count) return YES;
+
+    // find best completion
+    NSUInteger bestCompletionIdx = [matchingCompletions indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *completion = obj;
+        NSRange range = [completion rangeOfString:newText options:NSCaseInsensitiveSearch|NSAnchoredSearch];
+        return range.location == 0;
+    }];
+    if (NSNotFound == bestCompletionIdx) return YES;
+    NSString *bestCompletion = matchingCompletions[bestCompletionIdx];
+
+    // put best completion in textField as selection
+    textField.text = bestCompletion;
+    UITextPosition *beginning = [textField beginningOfDocument];
+    UITextPosition *selStart = [textField positionFromPosition:beginning offset:newText.length];
+    UITextPosition *selEnd = [textField positionFromPosition:beginning offset:bestCompletion.length];
+    textField.selectedTextRange = [textField textRangeFromPosition:selStart toPosition:selEnd];
+    return NO;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    // TODO: clear completions
     return YES;
 }
 
