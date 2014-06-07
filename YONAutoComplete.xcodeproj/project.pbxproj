@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		DC0A4A97194088EB006B0E86 /* YONAutoComplete.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A4A96194088EB006B0E86 /* YONAutoComplete.m */; };
+		DC37869419433B1100E4CCD9 /* completions.txt in Resources */ = {isa = PBXBuildFile; fileRef = DC37869319433B1100E4CCD9 /* completions.txt */; };
+		DC37869619433B7A00E4CCD9 /* other.txt in Resources */ = {isa = PBXBuildFile; fileRef = DC37869519433B7A00E4CCD9 /* other.txt */; };
 		DCA694F31940824300575F99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F21940824300575F99 /* Foundation.framework */; };
 		DCA694F51940824300575F99 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F41940824300575F99 /* CoreGraphics.framework */; };
 		DCA694F71940824300575F99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F61940824300575F99 /* UIKit.framework */; };
@@ -38,6 +40,8 @@
 /* Begin PBXFileReference section */
 		DC0A4A95194088EB006B0E86 /* YONAutoComplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YONAutoComplete.h; sourceTree = "<group>"; };
 		DC0A4A96194088EB006B0E86 /* YONAutoComplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YONAutoComplete.m; sourceTree = "<group>"; };
+		DC37869319433B1100E4CCD9 /* completions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = completions.txt; sourceTree = "<group>"; };
+		DC37869519433B7A00E4CCD9 /* other.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = other.txt; sourceTree = "<group>"; };
 		DCA694EF1940824300575F99 /* YONAutoComplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YONAutoComplete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA694F21940824300575F99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCA694F41940824300575F99 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -123,6 +127,8 @@
 				DCA695071940824300575F99 /* Main_iPad.storyboard */,
 				DCA6950A1940824300575F99 /* ViewController.h */,
 				DCA6950B1940824300575F99 /* ViewController.m */,
+				DC37869319433B1100E4CCD9 /* completions.txt */,
+				DC37869519433B7A00E4CCD9 /* other.txt */,
 				DC0A4A95194088EB006B0E86 /* YONAutoComplete.h */,
 				DC0A4A96194088EB006B0E86 /* YONAutoComplete.m */,
 				DCA6950D1940824300575F99 /* Images.xcassets */,
@@ -237,9 +243,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCA695091940824300575F99 /* Main_iPad.storyboard in Resources */,
+				DC37869619433B7A00E4CCD9 /* other.txt in Resources */,
 				DCA6950E1940824300575F99 /* Images.xcassets in Resources */,
 				DCA695061940824300575F99 /* Main_iPhone.storyboard in Resources */,
 				DCA694FD1940824300575F99 /* InfoPlist.strings in Resources */,
+				DC37869419433B1100E4CCD9 /* completions.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,6 @@
 
 @interface YONAutoComplete ()
 
-@property (nonatomic, strong) NSArray *completions;
 @property (nonatomic, strong) NSMutableArray *matchingCompletions;
 @property (nonatomic, weak) UITextField* textField;
 @property (nonatomic, assign) CGRect maxFrame;
@@ -98,17 +97,58 @@
     return YES;
 }
 
+- (NSString *)completionsFilePath
+{
+    NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];
+    NSString *filePath = [[documentsDirectory stringByAppendingPathComponent:self.completionsFileName] stringByAppendingPathExtension:@"txt"];
+    return filePath;
+}
+
+- (NSString *)readCompletionsFromFile
+{
+    if (self.completionsFileName.length == 0) self.completionsFileName = @"completions";
+    NSError *error;
+    NSString *completionsString = nil;
+
+    if (!self.freezeCompletionsFile) { // read user completions list
+        NSString *filePath = [self completionsFilePath];
+        completionsString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+    }
+
+    if (nil == completionsString) { // read bundled completions list
+        NSString *bundledFile = [[NSBundle mainBundle] pathForResource:self.completionsFileName ofType:@"txt"];
+        completionsString = [NSString stringWithContentsOfFile:bundledFile encoding:NSUTF8StringEncoding error:&error];
+    }
+
+    return completionsString;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    // TODO: read list of completions (in bg thread?)
-    self.completions = @[@"First", @"Second", @"Third", @"Fourth", @"The fifth symphony has very long endings, that just go on and on and on...", @"Sixth", @"Seven is a lucky number", @"end!"];
+    // read completions list
+    if (self.completions) return; // completions are supplied by client
+    NSString *completionsString = [self readCompletionsFromFile];
+    self.completions = completionsString ? [completionsString componentsSeparatedByString:@"\n"] : @[];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    // TODO: add textField.text to completions and give it highest priority
-    // TODO: hide view
-    // TODO: notify client
+    [self resetCompletions];
+    
+    // add textField.text to completions and give it highest priority
+    if (!self.freezeCompletionsFile) {
+        NSUInteger i = [self.completions indexOfObject:textField.text];
+        if (0 != i) { // put textField.text at the top
+            NSMutableArray *newCompletions = [self.completions mutableCopy];
+            if (NSNotFound != i) { // remove previous entry
+                [newCompletions removeObjectAtIndex:i];
+            }
+            [newCompletions insertObject:textField.text atIndex:0];
+            NSString *completionsString = [newCompletions componentsJoinedByString:@"\n"];
+            [completionsString writeToFile:[self completionsFilePath] atomically:NO encoding:NSUTF8StringEncoding error:NULL];
+        }
+    }
 }
 
 - (void)resetCompletions
