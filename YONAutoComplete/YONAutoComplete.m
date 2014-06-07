@@ -19,6 +19,8 @@
 
 @implementation YONAutoComplete
 
+#pragma mark - View Layout
+
 - (void)updateFrame
 {
     CGFloat maxWidth = CGRectGetWidth(_maxFrame);
@@ -47,6 +49,8 @@
     [self updateFrame];
 }
 
+#pragma mark - Item Selection
+
 - (void)handleTap:(UITapGestureRecognizer *)gestureRecognizer
 {
     // find tapped char
@@ -65,6 +69,8 @@
         }
     }
 }
+
+#pragma mark - Appearance
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
@@ -97,6 +103,8 @@
     return YES;
 }
 
+#pragma mark - File I/O
+
 - (NSString *)completionsFilePath
 {
     NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -124,38 +132,21 @@
     return completionsString;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    // read completions list
-    if (self.completions) return; // completions are supplied by client
-    NSString *completionsString = [self readCompletionsFromFile];
-    self.completions = completionsString ? [completionsString componentsSeparatedByString:@"\n"] : @[];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    [self resetCompletions];
-    
-    // add textField.text to completions and give it highest priority
-    if (!self.freezeCompletionsFile) {
-        NSUInteger i = [self.completions indexOfObject:textField.text];
-        if (0 != i) { // put textField.text at the top
-            NSMutableArray *newCompletions = [self.completions mutableCopy];
-            if (NSNotFound != i) { // remove previous entry
-                [newCompletions removeObjectAtIndex:i];
-            }
-            [newCompletions insertObject:textField.text atIndex:0];
-            NSString *completionsString = [newCompletions componentsJoinedByString:@"\n"];
-            [completionsString writeToFile:[self completionsFilePath] atomically:NO encoding:NSUTF8StringEncoding error:NULL];
-        }
-    }
-}
+#pragma mark - Finding Matches
 
 - (void)resetCompletions
 {
     self.text = nil;
     self.matchingCompletions = nil;
     [self updateFrame];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    // read completions list
+    if (self.completions) return; // completions are supplied by client
+    NSString *completionsString = [self readCompletionsFromFile];
+    self.completions = completionsString ? [completionsString componentsSeparatedByString:@"\n"] : @[];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -220,11 +211,32 @@
     return YES;
 }
 
+#pragma mark - Ending
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
 
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self resetCompletions];
+
+    // add textField.text to completions and give it highest priority
+    if (!self.freezeCompletionsFile) {
+        NSUInteger i = [self.completions indexOfObject:textField.text];
+        if (0 != i) { // put textField.text at the top
+            NSMutableArray *newCompletions = [self.completions mutableCopy];
+            if (NSNotFound != i) { // remove previous entry
+                [newCompletions removeObjectAtIndex:i];
+            }
+            [newCompletions insertObject:textField.text atIndex:0];
+            NSString *completionsString = [newCompletions componentsJoinedByString:@"\n"];
+            [completionsString writeToFile:[self completionsFilePath] atomically:NO encoding:NSUTF8StringEncoding error:NULL];
+        }
+    }
 }
 
 
