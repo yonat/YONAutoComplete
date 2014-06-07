@@ -89,8 +89,6 @@
     [textField.backgroundColor getRed:&r green:&g blue:&b alpha:&a];
     self.backgroundColor = [UIColor colorWithRed:r green:g blue:b alpha:0.75*a];
 
-    // TODO: add spacing between paragraphs
-
     // respond to taps
     if (nil == self.tap) {
         self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -131,11 +129,13 @@
 
     NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (newText.length == 0) return YES;
+    NSMutableAttributedString *completionsList = [NSMutableAttributedString new];
 
-    // mark completions with bold
+    // styles for paragraph and matches
     UIFontDescriptor *boldDescriptior = [self.font.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
     UIFont *boldFont = [UIFont fontWithDescriptor:boldDescriptior size:self.font.pointSize];
-    NSMutableAttributedString *completionsList = [NSMutableAttributedString new];
+    NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    paraStyle.paragraphSpacing = self.font.pointSize / 3;
 
     // find completions
     __block NSString *bestCompletion = nil;
@@ -157,6 +157,8 @@
             [completionsList insertAttributedString:match atIndex:0];
         }
     }
+
+    [completionsList addAttribute:NSParagraphStyleAttributeName value:paraStyle range:NSMakeRange(0, completionsList.length)];
 
     // update completions list
     self.attributedText = completionsList;
