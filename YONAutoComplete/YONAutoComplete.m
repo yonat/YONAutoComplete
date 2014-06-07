@@ -10,7 +10,8 @@
 
 @interface YONAutoComplete ()
 
-@property (nonatomic, strong) NSMutableArray *completions;
+@property (nonatomic, strong) NSArray *completions;
+@property (nonatomic, strong) NSMutableArray *matchingCompletions;
 @property (nonatomic, weak) UITextField* textField;
 @property (nonatomic, assign) CGRect maxFrame;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
@@ -55,18 +56,15 @@
     NSInteger charOffset = [self offsetFromPosition:self.beginningOfDocument toPosition:tapPosition];
 
     // find tapped item
-    NSString *allItems = self.text;
-    NSRange startRange = [allItems rangeOfString:@"\n" options:NSBackwardsSearch|NSLiteralSearch range:NSMakeRange(0, charOffset)];
-    if (NSNotFound == startRange.location) startRange = NSMakeRange(0, 0);
-    NSRange endRange = [allItems rangeOfString:@"\n" options:NSLiteralSearch range:NSMakeRange(charOffset, allItems.length-charOffset)];
-    if (NSNotFound == endRange.location) endRange = NSMakeRange(allItems.length, 0);
-    NSUInteger itemLocation = startRange.location + startRange.length;
-    NSUInteger itemLength = endRange.location - itemLocation;
-    NSString *selectedItem = [allItems substringWithRange:NSMakeRange(itemLocation, itemLength)];
-    // TODO: maybe just keep a table of offset->item
-
-    // set the text of the field
-    self.textField.text = selectedItem;
+    NSUInteger offset = 0;
+    for (NSString *completion in self.matchingCompletions) {
+        offset += completion.length + 1;
+        if (charOffset <= offset) {
+            // set the text of the field
+            self.textField.text = completion;
+            return;
+        }
+    }
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -91,6 +89,8 @@
     [textField.backgroundColor getRed:&r green:&g blue:&b alpha:&a];
     self.backgroundColor = [UIColor colorWithRed:r green:g blue:b alpha:0.75*a];
 
+    // TODO: add spacing between paragraphs
+
     // respond to taps
     if (nil == self.tap) {
         self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -113,13 +113,24 @@
     // TODO: notify client
 }
 
+- (void)resetCompletions
+{
+    self.text = nil;
+    self.matchingCompletions = nil;
+    [self updateFrame];
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (string.length == 0 && range.length > 1) { // user deleting selection
-        self.text = nil;
-        [self updateFrame];
-        return YES;
+    if (range.length > 0 || range.location < textField.text.length) { // deletion/overwrite
+        [self resetCompletions];
+        if (string.length == 0 && !textField.selectedTextRange.empty) { // user deleting selection
+            return YES;
+        }
     }
+
+    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (newText.length == 0) return YES;
 
     // mark completions with bold
     UIFontDescriptor *boldDescriptior = [self.font.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
@@ -129,20 +140,23 @@
     // find completions
     __block NSString *bestCompletion = nil;
     __block NSAttributedString *newLine = [[NSAttributedString alloc] initWithString:@"\n"];
-    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    [self.completions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *completion = obj;
+    if (nil == self.matchingCompletions) self.matchingCompletions = [self.completions mutableCopy];
+    for (NSUInteger i = self.matchingCompletions.count; i > 0; --i) {
+        NSString *completion = self.completions[i-1];
         NSRange range = [completion rangeOfString:newText options:NSCaseInsensitiveSearch];
-        if (NSNotFound != range.location) {
-            if (nil == bestCompletion && range.location == 0) {
+        if (NSNotFound == range.location) {
+            [self.matchingCompletions removeObjectAtIndex:i-1];
+        }
+        else {
+            if (range.location == 0) {
                 bestCompletion = completion;
             }
             NSMutableAttributedString *match = [[NSMutableAttributedString alloc] initWithString:completion];
             [match addAttribute:NSFontAttributeName value:boldFont range:range];
-            if (completionsList.length > 0) [completionsList appendAttributedString:newLine];
-            [completionsList appendAttributedString:match];
+            if (completionsList.length > 0) [completionsList insertAttributedString:newLine atIndex:0];
+            [completionsList insertAttributedString:match atIndex:0];
         }
-    }];
+    }
 
     // update completions list
     self.attributedText = completionsList;
@@ -160,8 +174,7 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
-    self.text = nil;
-    [self updateFrame];
+    [self resetCompletions];
     return YES;
 }
 
