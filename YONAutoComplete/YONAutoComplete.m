@@ -113,23 +113,53 @@
     return filePath;
 }
 
-- (NSString *)readCompletionsFromFile
+- (BOOL)isBundelUpdated:(NSString *)bundledFilePath
+{
+    NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:bundledFilePath error:nil];
+    if (nil != attributes) {
+        NSString *key = [@"Date-" stringByAppendingString:self.completionsFileName];
+        NSDate* updated = attributes.fileModificationDate;
+        NSDate* lastUpdate = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+        if (nil == lastUpdate || NSOrderedSame != [updated compare:lastUpdate]) {
+            [[NSUserDefaults standardUserDefaults] setObject:updated forKey:key];
+            return YES;
+        }
+    }
+
+    return  NO;
+}
+
+- (void)readCompletionsFromFile
 {
     if (self.completionsFileName.length == 0) self.completionsFileName = @"completions";
     NSError *error;
     NSString *completionsString = nil;
+    NSString *bundledCompletionsString = nil;
 
     if (!self.freezeCompletionsFile) { // read user completions list
         NSString *filePath = [self completionsFilePath];
         completionsString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
     }
 
-    if (nil == completionsString) { // read bundled completions list
-        NSString *bundledFile = [[NSBundle mainBundle] pathForResource:self.completionsFileName ofType:@"txt"];
-        completionsString = [NSString stringWithContentsOfFile:bundledFile encoding:NSUTF8StringEncoding error:&error];
+    // read bundled completions list
+    NSString *bundledFile = [[NSBundle mainBundle] pathForResource:self.completionsFileName ofType:@"txt"];
+    if (nil == completionsString || [self isBundelUpdated:bundledFile]) {
+        bundledCompletionsString = [NSString stringWithContentsOfFile:bundledFile encoding:NSUTF8StringEncoding error:&error];
+        bundledCompletionsString = [bundledCompletionsString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (0 == completionsString.length) {
+            completionsString = bundledCompletionsString;
+            bundledCompletionsString = nil;
+        }
     }
 
-    return completionsString;
+    self.completions = completionsString ? [completionsString componentsSeparatedByString:@"\n"] : @[];
+
+    // integrate completions from updated bundle
+    if (bundledCompletionsString.length > 0) {
+        NSMutableArray *bundledCompletions = [[bundledCompletionsString componentsSeparatedByString:@"\n"] mutableCopy];
+        [bundledCompletions removeObjectsInArray:self.completions];
+        self.completions = [self.completions arrayByAddingObjectsFromArray:bundledCompletions];
+    }
 }
 
 #pragma mark - Finding Matches
@@ -145,8 +175,7 @@
 {
     // read completions list
     if (self.completions) return; // completions are supplied by client
-    NSString *completionsString = [self readCompletionsFromFile];
-    self.completions = completionsString ? [completionsString componentsSeparatedByString:@"\n"] : @[];
+    [self readCompletionsFromFile];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -233,6 +262,7 @@
                 [newCompletions removeObjectAtIndex:i];
             }
             [newCompletions insertObject:textField.text atIndex:0];
+            [newCompletions removeObject:@""];
             NSString *completionsString = [newCompletions componentsJoinedByString:@"\n"];
             [completionsString writeToFile:[self completionsFilePath] atomically:NO encoding:NSUTF8StringEncoding error:NULL];
         }
