@@ -196,6 +196,7 @@
     UIFont *boldFont = [UIFont fontWithDescriptor:boldDescriptior size:self.font.pointSize];
     NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     paraStyle.paragraphSpacing = self.font.pointSize / 3;
+    [completionsList addAttribute:NSParagraphStyleAttributeName value:paraStyle range:NSMakeRange(0, completionsList.length)];
 
     // find completions
     __block NSString *bestCompletion = nil;
@@ -212,13 +213,12 @@
                 bestCompletion = completion;
             }
             NSMutableAttributedString *match = [[NSMutableAttributedString alloc] initWithString:completion];
+            [match addAttribute:NSFontAttributeName value:self.font range:NSMakeRange(0, match.length)];
             [match addAttribute:NSFontAttributeName value:boldFont range:range];
             if (completionsList.length > 0) [completionsList insertAttributedString:newLine atIndex:0];
             [completionsList insertAttributedString:match atIndex:0];
         }
     }
-
-    [completionsList addAttribute:NSParagraphStyleAttributeName value:paraStyle range:NSMakeRange(0, completionsList.length)];
 
     // update completions list
     self.attributedText = completionsList;
