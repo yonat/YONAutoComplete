@@ -72,6 +72,11 @@
 
 #pragma mark - Appearance
 
+- (void)useTextFieldFont
+{
+    self.font = [UIFont fontWithName:self.textField.font.fontName size:0.9*self.textField.font.pointSize];
+}
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     self.textField = textField;
@@ -85,7 +90,7 @@
 
     // style same as textField, only smaller and paler
     self.textAlignment = textField.textAlignment;
-    self.font = [UIFont fontWithName:textField.font.fontName size:0.9*textField.font.pointSize];
+    [self useTextFieldFont];
     CGFloat r, g, b, a;
     r = g = b = 0; a = 1;
     [textField.textColor getRed:&r green:&g blue:&b alpha:&a];
@@ -180,6 +185,8 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+    [self useTextFieldFont];
+
     if (range.length > 0 || range.location < textField.text.length) { // deletion/overwrite
         [self resetCompletions];
         if (string.length == 0 && !textField.selectedTextRange.empty) { // user deleting selection
@@ -203,7 +210,7 @@
     __block NSAttributedString *newLine = [[NSAttributedString alloc] initWithString:@"\n"];
     if (nil == self.matchingCompletions) self.matchingCompletions = [self.completions mutableCopy];
     for (NSUInteger i = self.matchingCompletions.count; i > 0; --i) {
-        NSString *completion = self.completions[i-1];
+        NSString *completion = self.matchingCompletions[i-1];
         NSRange range = [completion rangeOfString:newText options:NSCaseInsensitiveSearch];
         if (NSNotFound == range.location) {
             [self.matchingCompletions removeObjectAtIndex:i-1];
