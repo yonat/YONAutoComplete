@@ -19,16 +19,16 @@
 {
     [super viewDidLoad];
 
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 20, 300, 24)];
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 50, 300, 24)];
     [self.view addSubview:textField];
     textField.borderStyle = UITextBorderStyleRoundedRect;
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    textField.text = @"Lorem ipsum dolor sit amet, tempor.";
-    textField.backgroundColor = [UIColor greenColor];
+//    textField.text = @"Lorem ipsum dolor sit amet, tempor.";
     textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 
     self.autoComplete = [YONAutoComplete new];
     textField.delegate = self.autoComplete;
+    self.autoComplete.completionsFileName = @"other";
 
     [textField becomeFirstResponder];
 }

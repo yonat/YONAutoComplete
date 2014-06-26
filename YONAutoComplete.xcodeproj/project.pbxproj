@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DC0A4A97194088EB006B0E86 /* YONAutoComplete.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A4A96194088EB006B0E86 /* YONAutoComplete.m */; };
 		DC37869419433B1100E4CCD9 /* completions.txt in Resources */ = {isa = PBXBuildFile; fileRef = DC37869319433B1100E4CCD9 /* completions.txt */; };
 		DC37869619433B7A00E4CCD9 /* other.txt in Resources */ = {isa = PBXBuildFile; fileRef = DC37869519433B7A00E4CCD9 /* other.txt */; };
+		DC8FDB82195C52A500465038 /* YONAutoComplete.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8FDB81195C52A500465038 /* YONAutoComplete.m */; };
 		DCA694F31940824300575F99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F21940824300575F99 /* Foundation.framework */; };
 		DCA694F51940824300575F99 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F41940824300575F99 /* CoreGraphics.framework */; };
 		DCA694F71940824300575F99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F61940824300575F99 /* UIKit.framework */; };
@@ -23,8 +23,6 @@
 		DCA695151940824300575F99 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA695141940824300575F99 /* XCTest.framework */; };
 		DCA695161940824300575F99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F21940824300575F99 /* Foundation.framework */; };
 		DCA695171940824300575F99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F61940824300575F99 /* UIKit.framework */; };
-		DCA6951F1940824300575F99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCA6951D1940824300575F99 /* InfoPlist.strings */; };
-		DCA695211940824300575F99 /* YONAutoCompleteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA695201940824300575F99 /* YONAutoCompleteTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,10 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DC0A4A95194088EB006B0E86 /* YONAutoComplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YONAutoComplete.h; sourceTree = "<group>"; };
-		DC0A4A96194088EB006B0E86 /* YONAutoComplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YONAutoComplete.m; sourceTree = "<group>"; };
 		DC37869319433B1100E4CCD9 /* completions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = completions.txt; sourceTree = "<group>"; };
 		DC37869519433B7A00E4CCD9 /* other.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = other.txt; sourceTree = "<group>"; };
+		DC8FDB80195C52A500465038 /* YONAutoComplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YONAutoComplete.h; sourceTree = "<group>"; };
+		DC8FDB81195C52A500465038 /* YONAutoComplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YONAutoComplete.m; sourceTree = "<group>"; };
 		DCA694EF1940824300575F99 /* YONAutoComplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YONAutoComplete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA694F21940824300575F99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCA694F41940824300575F99 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,9 +57,6 @@
 		DCA6950D1940824300575F99 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DCA695131940824300575F99 /* YONAutoCompleteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YONAutoCompleteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA695141940824300575F99 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		DCA6951C1940824300575F99 /* YONAutoCompleteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YONAutoCompleteTests-Info.plist"; sourceTree = "<group>"; };
-		DCA6951E1940824300575F99 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DCA695201940824300575F99 /* YONAutoCompleteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YONAutoCompleteTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +86,9 @@
 		DCA694E61940824300575F99 = {
 			isa = PBXGroup;
 			children = (
+				DC8FDB80195C52A500465038 /* YONAutoComplete.h */,
+				DC8FDB81195C52A500465038 /* YONAutoComplete.m */,
 				DCA694F81940824300575F99 /* YONAutoComplete */,
-				DCA6951A1940824300575F99 /* YONAutoCompleteTests */,
 				DCA694F11940824300575F99 /* Frameworks */,
 				DCA694F01940824300575F99 /* Products */,
 			);
@@ -129,8 +125,6 @@
 				DCA6950B1940824300575F99 /* ViewController.m */,
 				DC37869319433B1100E4CCD9 /* completions.txt */,
 				DC37869519433B7A00E4CCD9 /* other.txt */,
-				DC0A4A95194088EB006B0E86 /* YONAutoComplete.h */,
-				DC0A4A96194088EB006B0E86 /* YONAutoComplete.m */,
 				DCA6950D1940824300575F99 /* Images.xcassets */,
 				DCA694F91940824300575F99 /* Supporting Files */,
 			);
@@ -144,24 +138,6 @@
 				DCA694FB1940824300575F99 /* InfoPlist.strings */,
 				DCA694FE1940824300575F99 /* main.m */,
 				DCA695001940824300575F99 /* YONAutoComplete-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DCA6951A1940824300575F99 /* YONAutoCompleteTests */ = {
-			isa = PBXGroup;
-			children = (
-				DCA695201940824300575F99 /* YONAutoCompleteTests.m */,
-				DCA6951B1940824300575F99 /* Supporting Files */,
-			);
-			path = YONAutoCompleteTests;
-			sourceTree = "<group>";
-		};
-		DCA6951B1940824300575F99 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				DCA6951C1940824300575F99 /* YONAutoCompleteTests-Info.plist */,
-				DCA6951D1940824300575F99 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -255,7 +231,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCA6951F1940824300575F99 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,10 +241,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC8FDB82195C52A500465038 /* YONAutoComplete.m in Sources */,
 				DCA6950C1940824300575F99 /* ViewController.m in Sources */,
 				DCA695031940824300575F99 /* AppDelegate.m in Sources */,
 				DCA694FF1940824300575F99 /* main.m in Sources */,
-				DC0A4A97194088EB006B0E86 /* YONAutoComplete.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +252,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCA695211940824300575F99 /* YONAutoCompleteTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,14 +288,6 @@
 				DCA695081940824300575F99 /* Base */,
 			);
 			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-		DCA6951D1940824300575F99 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DCA6951E1940824300575F99 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
