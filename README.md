@@ -31,3 +31,11 @@ To prevent user-typed values from being added to the completions list:
 ```objective-c
     autoComplete.freezeCompletionsFile = YES;
 ```
+
+## Installation
+
+### CocoaPods:
+
+```ruby
+pod 'YONAutoComplete'
+```

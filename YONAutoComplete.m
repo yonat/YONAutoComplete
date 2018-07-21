@@ -6,6 +6,21 @@
 
 #import "YONAutoComplete.h"
 
+
+@interface UIView (mxcl)
+- (UIViewController *)parentViewController;
+@end
+
+@implementation UIView (mxcl)
+- (UIViewController *)parentViewController {
+    UIResponder *responder = self;
+    while ([responder isKindOfClass:[UIView class]])
+        responder = [responder nextResponder];
+    return (UIViewController *)responder;
+}
+@end
+
+
 @interface YONAutoComplete ()
 
 @property (nonatomic, strong) NSMutableArray *matchingCompletions;
@@ -40,7 +55,7 @@
     }
 
     // update maxFrame
-    _maxFrame = self.textField.frame;
+    _maxFrame = [self.superview convertRect:self.textField.frame fromView:self.textField.superview];
     _maxFrame.origin.y += _maxFrame.size.height;
     _maxFrame.size.height = maxHeight;
 
@@ -81,7 +96,17 @@
     self.editable = NO;
     self.dataDetectorTypes = UIDataDetectorTypeNone;
 
-    [textField.superview addSubview:self];
+    UIView *parentView = textField.superview;
+    if ([NSStringFromClass(textField.class) containsString:@"AlertController"]) {
+        UIViewController *parentVC = textField.parentViewController;
+        while (![parentVC isKindOfClass:UIAlertController.class]) {
+            parentVC = parentVC.view.superview.parentViewController;
+        }
+        parentView = parentVC.view;
+    }
+    if (nil == self.superview) {
+        [parentView addSubview:self];
+    }
     [self adjustMaxFrame:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adjustMaxFrame:) name:UIKeyboardDidShowNotification object:nil];
@@ -89,13 +114,8 @@
     // style same as textField, only smaller and paler
     self.textAlignment = textField.textAlignment;
     [self useTextFieldFont];
-    CGFloat r, g, b, a;
-    r = g = b = 0; a = 1;
-    [textField.textColor getRed:&r green:&g blue:&b alpha:&a];
-    self.textColor = [UIColor colorWithRed:r green:g blue:b alpha:0.75*a];
-    r = g = b = a = 1;
-    [textField.backgroundColor getRed:&r green:&g blue:&b alpha:&a];
-    self.backgroundColor = [UIColor colorWithRed:r green:g blue:b alpha:0.75*a];
+    self.textColor = [textField.textColor colorWithAlphaComponent:0.75];
+    self.backgroundColor = [textField.backgroundColor colorWithAlphaComponent:0.75];
 
     // respond to taps
     if (nil == self.tap) {
@@ -276,6 +296,5 @@
     // forward the action
     [textField sendActionsForControlEvents:UIControlEventEditingDidEndOnExit];
 }
-
 
 @end

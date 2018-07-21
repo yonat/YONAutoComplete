@@ -1,15 +1,8 @@
-#
-#  Be sure to run `pod spec lint YONAutoComplete.podspec' to ensure this is a
-#  valid spec and to remove all comments including this before submitting the spec.
-#
-#  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
-#  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
-#
 
 Pod::Spec.new do |s|
 
   s.name         = "YONAutoComplete"
-  s.version      = "1.0.0"
+  s.version      = "1.1.0"
   s.summary      = "Add auto-completion to a UITextField"
 
   s.description  = <<-DESC
@@ -34,7 +27,7 @@ The user can either choose from the list of completions, or type a new value tha
 
   s.platform     = :ios, "5.0"
 
-  s.source       = { :git => "https://github.com/yonat/YONAutoComplete.git", :commit => "1d4e00d3f370d34d6c2388560812c2770892a995", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/yonat/YONAutoComplete.git", :tag => s.version }
 
   s.source_files  = "*.{h,m}"
   s.exclude_files = "YONAutoComplete", "YONAutoComplete.xcodeproj"
