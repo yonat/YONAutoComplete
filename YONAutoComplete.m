@@ -39,7 +39,13 @@
     CGFloat maxWidth = CGRectGetWidth(_maxFrame);
     CGSize newSize = self.text.length ? [self sizeThatFits:CGSizeMake(maxWidth, MAXFLOAT)] : CGSizeZero;
     CGRect newFrame = _maxFrame;
-    newFrame.size = CGSizeMake(MAX(newSize.width, maxWidth), MIN(newSize.height, CGRectGetHeight(_maxFrame)));
+    if (self.superview == self.textField.superview) {
+        newFrame.size = CGSizeMake(MAX(newSize.width, maxWidth), MIN(newSize.height, CGRectGetHeight(_maxFrame)));
+    } else { // show completions above textField
+        newFrame.size = CGSizeMake(MAX(newSize.width, maxWidth), newSize.height);
+        newFrame.origin = [self.superview convertPoint:self.textField.superview.bounds.origin fromView:self.textField.superview];
+        newFrame.origin.y -= newFrame.size.height;
+    }
     self.frame = newFrame;
 }
 
@@ -115,12 +121,20 @@
     self.textAlignment = textField.textAlignment;
     [self useTextFieldFont];
     self.textColor = [textField.textColor colorWithAlphaComponent:0.75];
-    self.backgroundColor = [textField.backgroundColor colorWithAlphaComponent:0.75];
+    UIColor *textFieldBackgroundColor = textField.backgroundColor != nil ? textField.backgroundColor : UIColor.whiteColor;
+    self.backgroundColor = [textFieldBackgroundColor colorWithAlphaComponent:0.75];
+    self.layer.borderColor = [self.textColor colorWithAlphaComponent:0.25].CGColor;
+    self.layer.borderWidth = 0.25;
 
     // respond to taps
     if (nil == self.tap) {
         self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [self addGestureRecognizer:self.tap];
+    }
+
+    // read completions list
+    if (!self.completions) {
+        [self readCompletionsFromFile];
     }
 
     return YES;
@@ -136,7 +150,7 @@
     return filePath;
 }
 
-- (BOOL)isBundelUpdated:(NSString *)bundledFilePath
+- (BOOL)isBundleUpdated:(NSString *)bundledFilePath
 {
     NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:bundledFilePath error:nil];
     if (nil != attributes) {
@@ -166,7 +180,7 @@
 
     // read bundled completions list
     NSString *bundledFile = [[NSBundle mainBundle] pathForResource:self.completionsFileName ofType:@"txt"];
-    if (nil == completionsString || [self isBundelUpdated:bundledFile]) {
+    if (nil == completionsString || [self isBundleUpdated:bundledFile]) {
         bundledCompletionsString = [NSString stringWithContentsOfFile:bundledFile encoding:NSUTF8StringEncoding error:&error];
         bundledCompletionsString = [bundledCompletionsString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         if (0 == completionsString.length) {
@@ -194,13 +208,6 @@
     [self updateFrame];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    // read completions list
-    if (self.completions) return; // completions are supplied by client
-    [self readCompletionsFromFile];
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     [self useTextFieldFont];
@@ -217,8 +224,8 @@
     NSMutableAttributedString *completionsList = [NSMutableAttributedString new];
 
     // styles for paragraph and matches
-    UIFontDescriptor *boldDescriptior = [self.font.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
-    UIFont *boldFont = [UIFont fontWithDescriptor:boldDescriptior size:self.font.pointSize];
+    UIFontDescriptor *boldDescriptor = [self.font.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+    UIFont *boldFont = [UIFont fontWithDescriptor:boldDescriptor size:self.font.pointSize];
     NSMutableParagraphStyle *paraStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     paraStyle.paragraphSpacing = self.font.pointSize / 3;
     [completionsList addAttribute:NSParagraphStyleAttributeName value:paraStyle range:NSMakeRange(0, completionsList.length)];
