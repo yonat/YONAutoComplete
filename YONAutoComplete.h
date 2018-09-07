@@ -21,13 +21,16 @@
 
 @interface YONAutoComplete : UITextView <UITextFieldDelegate>
 
-// completionsFileName.txt is a simple text file, one completion per line:
+/// completionsFileName.txt is a simple text file, one completion per line
 @property (nonatomic, strong) NSString *completionsFileName; // Defaults to @"completions"
 
-// User chosen values are automatically added to the completions file, unless you freeze it:
+/// User chosen values are automatically added to the completions file, unless you freeze it
 @property (nonatomic, assign) BOOL freezeCompletionsFile;
 
-// You can set the completions list programmatically, instead of from a file:
+/// You can set the completions list programmatically, instead of from a file
 @property (nonatomic, strong) NSArray *completions;
+
+/// Don't auto-complete until the number of possible completions is maxCompletions or less (default is 0 = no limit)
+@property (nonatomic, assign) NSInteger maxCompletions;
 
 @end

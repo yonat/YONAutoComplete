@@ -37,7 +37,7 @@
 - (void)updateFrame
 {
     CGFloat maxWidth = CGRectGetWidth(_maxFrame);
-    CGSize newSize = self.text.length ? [self sizeThatFits:CGSizeMake(maxWidth, MAXFLOAT)] : CGSizeZero;
+    CGSize newSize = self.text.length && !self.shouldHideCompletions ? [self sizeThatFits:CGSizeMake(maxWidth, MAXFLOAT)] : CGSizeZero;
     CGRect newFrame = _maxFrame;
     if (self.superview == self.textField.superview) {
         newFrame.size = CGSizeMake(MAX(newSize.width, maxWidth), MIN(newSize.height, CGRectGetHeight(_maxFrame)));
@@ -258,6 +258,7 @@
 
     // put best completion in textField as selection
     if (nil == bestCompletion) return YES;
+    if (self.shouldHideCompletions) return YES;
     textField.text = bestCompletion;
     UITextPosition *beginning = [textField beginningOfDocument];
     UITextPosition *selStart = [textField positionFromPosition:beginning offset:newText.length];
@@ -270,6 +271,10 @@
 {
     [self resetCompletions];
     return YES;
+}
+
+- (BOOL)shouldHideCompletions {
+    return (self.maxCompletions > 0 && self.maxCompletions < self.matchingCompletions.count);
 }
 
 #pragma mark - Ending

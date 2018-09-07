@@ -29,6 +29,7 @@
     self.autoComplete = [YONAutoComplete new];
     textField.delegate = self.autoComplete;
     self.autoComplete.completionsFileName = @"other";
+    self.autoComplete.maxCompletions = 5;
 
     [textField becomeFirstResponder];
 }
