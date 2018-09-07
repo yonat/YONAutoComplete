@@ -6,17 +6,20 @@
 
 #import "YONAutoComplete.h"
 
-
 @interface UIView (mxcl)
 - (UIViewController *)parentViewController;
 @end
 
 @implementation UIView (mxcl)
 - (UIViewController *)parentViewController {
-    UIResponder *responder = self;
-    while ([responder isKindOfClass:[UIView class]])
+    if (@available(iOS 10.0, *)) {
+        UIResponder *responder = self;
+        while ([responder isKindOfClass:[UIView class]])
         responder = [responder nextResponder];
-    return (UIViewController *)responder;
+        return (UIViewController *)responder;
+    } else {
+        return nil;
+    }
 }
 @end
 
@@ -103,12 +106,14 @@
     self.dataDetectorTypes = UIDataDetectorTypeNone;
 
     UIView *parentView = textField.superview;
-    if ([NSStringFromClass(textField.class) containsString:@"AlertController"]) {
-        UIViewController *parentVC = textField.parentViewController;
-        while (![parentVC isKindOfClass:UIAlertController.class]) {
-            parentVC = parentVC.view.superview.parentViewController;
+    if (@available(iOS 10.0, *)) {
+        if ([NSStringFromClass(textField.class) containsString:@"AlertController"]) {
+            UIViewController *parentVC = textField.parentViewController;
+            while (![parentVC isKindOfClass:UIAlertController.class]) {
+                parentVC = parentVC.view.superview.parentViewController;
+            }
+            parentView = parentVC.view;
         }
-        parentView = parentVC.view;
     }
     if (nil == self.superview) {
         [parentView addSubview:self];

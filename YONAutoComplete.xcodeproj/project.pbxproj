@@ -20,20 +20,7 @@
 		DCA695091940824300575F99 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA695071940824300575F99 /* Main_iPad.storyboard */; };
 		DCA6950C1940824300575F99 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA6950B1940824300575F99 /* ViewController.m */; };
 		DCA6950E1940824300575F99 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA6950D1940824300575F99 /* Images.xcassets */; };
-		DCA695151940824300575F99 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA695141940824300575F99 /* XCTest.framework */; };
-		DCA695161940824300575F99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F21940824300575F99 /* Foundation.framework */; };
-		DCA695171940824300575F99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA694F61940824300575F99 /* UIKit.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		DCA695181940824300575F99 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DCA694E71940824300575F99 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DCA694EE1940824300575F99;
-			remoteInfo = YONAutoComplete;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		DC37869319433B1100E4CCD9 /* completions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = completions.txt; sourceTree = "<group>"; };
@@ -55,7 +42,6 @@
 		DCA6950A1940824300575F99 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		DCA6950B1940824300575F99 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		DCA6950D1940824300575F99 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		DCA695131940824300575F99 /* YONAutoCompleteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YONAutoCompleteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA695141940824300575F99 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -67,16 +53,6 @@
 				DCA694F51940824300575F99 /* CoreGraphics.framework in Frameworks */,
 				DCA694F71940824300575F99 /* UIKit.framework in Frameworks */,
 				DCA694F31940824300575F99 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DCA695101940824300575F99 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DCA695151940824300575F99 /* XCTest.framework in Frameworks */,
-				DCA695171940824300575F99 /* UIKit.framework in Frameworks */,
-				DCA695161940824300575F99 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				DCA694EF1940824300575F99 /* YONAutoComplete.app */,
-				DCA695131940824300575F99 /* YONAutoCompleteTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,24 +137,6 @@
 			productReference = DCA694EF1940824300575F99 /* YONAutoComplete.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DCA695121940824300575F99 /* YONAutoCompleteTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DCA695271940824300575F99 /* Build configuration list for PBXNativeTarget "YONAutoCompleteTests" */;
-			buildPhases = (
-				DCA6950F1940824300575F99 /* Sources */,
-				DCA695101940824300575F99 /* Frameworks */,
-				DCA695111940824300575F99 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DCA695191940824300575F99 /* PBXTargetDependency */,
-			);
-			name = YONAutoCompleteTests;
-			productName = YONAutoCompleteTests;
-			productReference = DCA695131940824300575F99 /* YONAutoCompleteTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -188,11 +145,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Yonat Sharon";
-				TargetAttributes = {
-					DCA695121940824300575F99 = {
-						TestTargetID = DCA694EE1940824300575F99;
-					};
-				};
 			};
 			buildConfigurationList = DCA694EA1940824300575F99 /* Build configuration list for PBXProject "YONAutoComplete" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -208,7 +160,6 @@
 			projectRoot = "";
 			targets = (
 				DCA694EE1940824300575F99 /* YONAutoComplete */,
-				DCA695121940824300575F99 /* YONAutoCompleteTests */,
 			);
 		};
 /* End PBXProject section */
@@ -227,13 +178,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCA695111940824300575F99 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -248,22 +192,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCA6950F1940824300575F99 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DCA695191940824300575F99 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DCA694EE1940824300575F99 /* YONAutoComplete */;
-			targetProxy = DCA695181940824300575F99 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DCA694FB1940824300575F99 /* InfoPlist.strings */ = {
@@ -325,7 +254,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -358,7 +287,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -391,46 +320,6 @@
 			};
 			name = Release;
 		};
-		DCA695281940824300575F99 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/YONAutoComplete.app/YONAutoComplete";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "YONAutoComplete/YONAutoComplete-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "YONAutoCompleteTests/YONAutoCompleteTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		DCA695291940824300575F99 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/YONAutoComplete.app/YONAutoComplete";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "YONAutoComplete/YONAutoComplete-Prefix.pch";
-				INFOPLIST_FILE = "YONAutoCompleteTests/YONAutoCompleteTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -448,15 +337,6 @@
 			buildConfigurations = (
 				DCA695251940824300575F99 /* Debug */,
 				DCA695261940824300575F99 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DCA695271940824300575F99 /* Build configuration list for PBXNativeTarget "YONAutoCompleteTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DCA695281940824300575F99 /* Debug */,
-				DCA695291940824300575F99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

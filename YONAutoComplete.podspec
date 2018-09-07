@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "YONAutoComplete"
-  s.version      = "1.2.0"
+  s.version      = "1.2.1"
   s.summary      = "Add auto-completion to a UITextField"
 
   s.description  = <<-DESC
@@ -25,7 +25,7 @@ The user can either choose from the list of completions, or type a new value tha
   s.author             = { "Yonat Sharon" => "yonat@ootips.org" }
   s.social_media_url   = "http://twitter.com/yonatsharon"
 
-  s.platform     = :ios, "9.3"
+  s.platform     = :ios, "8.0"
 
   s.source       = { :git => "https://github.com/yonat/YONAutoComplete.git", :tag => s.version }
 
