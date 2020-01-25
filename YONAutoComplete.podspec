@@ -23,7 +23,7 @@ The user can either choose from the list of completions, or type a new value tha
   s.license      = { :type => "MIT", :file => "LICENSE.txt" }
 
   s.author             = { "Yonat Sharon" => "yonat@ootips.org" }
-  s.social_media_url   = "http://twitter.com/yonatsharon"
+  s.social_media_url   = "https://twitter.com/yonatsharon"
 
   s.platform     = :ios, "8.0"
 

@@ -309,9 +309,6 @@
             [completionsString writeToFile:[self completionsFilePath] atomically:NO encoding:NSUTF8StringEncoding error:NULL];
         }
     }
-
-    // forward the action
-    [textField sendActionsForControlEvents:UIControlEventEditingDidEndOnExit];
 }
 
 @end

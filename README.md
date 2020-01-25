@@ -12,7 +12,7 @@ textField.delegate = autoComplete;
 
 The user can either choose from the list of completions, or type a new value that will be added to the list automatically.
 
-### Customiztion
+### Customization
 
 You can use pre-assembled completions list from a text file:
 
