@@ -142,7 +142,11 @@
         [self readCompletionsFromFile];
     }
 
-    return YES;
+    if (self.textFieldDelegate && [self.textFieldDelegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
+        return [self.textFieldDelegate textFieldShouldBeginEditing:textField];
+    } else {
+        return YES;
+    }
 }
 
 #pragma mark - File I/O
@@ -217,15 +221,19 @@
 {
     [self useTextFieldFont];
 
+    BOOL result = (self.textFieldDelegate && [self.textFieldDelegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)])
+        ? [self.textFieldDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string]
+        : YES;
+
     if (range.length > 0 || range.location < textField.text.length) { // deletion/overwrite
         [self resetCompletions];
         if (string.length == 0 && !textField.selectedTextRange.empty) { // user deleting selection
-            return YES;
+            return result;
         }
     }
 
     NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (newText.length == 0) return YES;
+    if (newText.length == 0) return result;
     NSMutableAttributedString *completionsList = [NSMutableAttributedString new];
 
     // styles for paragraph and matches
@@ -262,8 +270,8 @@
     [self updateFrame];
 
     // put best completion in textField as selection
-    if (nil == bestCompletion) return YES;
-    if (self.shouldHideCompletions) return YES;
+    if (nil == bestCompletion) return result;
+    if (self.shouldHideCompletions) return result;
     textField.text = bestCompletion;
     UITextPosition *beginning = [textField beginningOfDocument];
     UITextPosition *selStart = [textField positionFromPosition:beginning offset:newText.length];
@@ -275,7 +283,12 @@
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
     [self resetCompletions];
-    return YES;
+
+    if (self.textFieldDelegate && [self.textFieldDelegate respondsToSelector:@selector(textFieldShouldClear:)]) {
+        return [self.textFieldDelegate textFieldShouldClear:textField];
+    } else {
+        return YES;
+    }
 }
 
 - (BOOL)shouldHideCompletions {
@@ -288,7 +301,11 @@
 {
     [textField resignFirstResponder];
 
-    return YES;
+    if (self.textFieldDelegate && [self.textFieldDelegate respondsToSelector:@selector(textFieldShouldReturn:)]) {
+        return [self.textFieldDelegate textFieldShouldReturn:textField];
+    } else {
+        return YES;
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -307,6 +324,44 @@
             [newCompletions removeObject:@""];
             NSString *completionsString = [newCompletions componentsJoinedByString:@"\n"];
             [completionsString writeToFile:[self completionsFilePath] atomically:NO encoding:NSUTF8StringEncoding error:NULL];
+        }
+    }
+
+    if (self.textFieldDelegate && [self.textFieldDelegate respondsToSelector:@selector(textFieldDidEndEditing:)]) {
+        [self.textFieldDelegate textFieldDidEndEditing:textField];
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (self.textFieldDelegate && [self.textFieldDelegate respondsToSelector:@selector(textFieldDidBeginEditing:)]) {
+        [self.textFieldDelegate textFieldDidBeginEditing:textField];
+    }
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if (self.textFieldDelegate && [self.textFieldDelegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
+        return [self.textFieldDelegate textFieldShouldEndEditing:textField];
+    } else {
+        return YES;
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason
+{
+    if (self.textFieldDelegate && [self.textFieldDelegate respondsToSelector:@selector(textFieldDidEndEditing:reason:)]) {
+        [self.textFieldDelegate textFieldDidEndEditing:textField reason:reason];
+    }
+}
+
+- (void)textFieldDidChangeSelection:(UITextField *)textField
+{
+    if (@available(iOS 13.0, *)) {
+        if (self.textFieldDelegate && [self.textFieldDelegate respondsToSelector:@selector(textFieldDidChangeSelection:)]) {
+            [self.textFieldDelegate textFieldDidChangeSelection:textField];
         }
     }
 }

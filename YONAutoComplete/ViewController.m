@@ -9,8 +9,9 @@
 #import "ViewController.h"
 #import "YONAutoComplete.h"
 
-@interface ViewController ()
+@interface ViewController () <UITextFieldDelegate>
 @property (nonatomic, strong) YONAutoComplete *autoComplete;
+@property (nonatomic, strong) UITextField *textField;
 @end
 
 @implementation ViewController
@@ -19,19 +20,33 @@
 {
     [super viewDidLoad];
 
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 50, 300, 24)];
-    [self.view addSubview:textField];
-    textField.borderStyle = UITextBorderStyleRoundedRect;
-    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-//    textField.text = @"Lorem ipsum dolor sit amet, tempor.";
-    textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 50, 300, 24)];
+    [self.view addSubview:self.textField];
+    self.textField.borderStyle = UITextBorderStyleRoundedRect;
+    self.textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//    self.textField.text = @"Lorem ipsum dolor sit amet, tempor.";
+    self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 
     self.autoComplete = [YONAutoComplete new];
-    textField.delegate = self.autoComplete;
+    self.textField.delegate = self.autoComplete;
     self.autoComplete.completionsFileName = @"other";
     self.autoComplete.maxCompletions = 7;
 
-    [textField becomeFirstResponder];
+    self.autoComplete.textFieldDelegate = self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.textField becomeFirstResponder];
+}
+
+- (BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string
+{
+    NSLog(@"textField replacementString: %@", string);
+    return YES;
 }
 
 @end
