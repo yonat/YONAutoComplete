@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "YONAutoComplete"
-  s.version      = "1.3.0"
+  s.version      = "1.3.1"
   s.summary      = "Add auto-completion to a UITextField"
 
   s.description  = <<-DESC
@@ -23,7 +23,6 @@ The user can either choose from the list of completions, or type a new value tha
   s.license      = { :type => "MIT", :file => "LICENSE.txt" }
 
   s.author             = { "Yonat Sharon" => "yonat@ootips.org" }
-  s.social_media_url   = "https://twitter.com/yonatsharon"
 
   s.platform     = :ios, "8.0"
 
