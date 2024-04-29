@@ -30,7 +30,7 @@ The user can either choose from the list of completions, or type a new value tha
 
   s.source_files  = "*.{h,m}"
   s.exclude_files = "YONAutoComplete", "YONAutoComplete.xcodeproj"
-  s.resources = ['PrivacyInfo.xcprivacy']
+  s.resource_bundles = {s.name => ['PrivacyInfo.xcprivacy']}
 
   s.requires_arc = true
 
